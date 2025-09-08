@@ -19,13 +19,13 @@ import { EMAIL_REG, PASSWORD_REG } from 'src/configs/regex'
 import CustomTextField from 'src/components/text-field'
 import IconifyIcon from 'src/components/Icon'
 //image
-import LoginDark from '/public/images/login-dark.png'
-import LoginLight from '/public/images/login-light.png'
+import RegisterDark from '/public/images/register-dark.png'
+import RegisterLight from '/public/images/register-light.png'
 import FacebookSvg from '/public/svgs/facebooksvg.svg'
 import GoogleSvg from '/public/svgs/googlesvg.svg'
 
 type TProps = {}
-const LoginPage: NextPage<TProps> = () => {
+const RegisterPage: NextPage<TProps> = () => {
   //state
   const [showPassword, setShowPassword] = useState(false)
   const [isRemember, setIsRemember] = useState(false)
@@ -37,9 +37,13 @@ const LoginPage: NextPage<TProps> = () => {
     password: yup
       .string()
       .required('This field is required')
+      .matches(PASSWORD_REG, 'Password is contain character, number and special character'),
+    ConfirmPassword: yup
+      .string()
+      .required('This field is required')
       .matches(PASSWORD_REG, 'Password is contain character, number and special character')
+      .oneOf([yup.ref('password')], 'Passwords must match')
   })
-
   const {
     handleSubmit,
     control,
@@ -47,7 +51,8 @@ const LoginPage: NextPage<TProps> = () => {
   } = useForm({
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      ConfirmPassword: ''
     },
     mode: 'onBlur',
     resolver: yupResolver(schema)
@@ -82,7 +87,7 @@ const LoginPage: NextPage<TProps> = () => {
         }}
       >
         <Image
-          src={theme.palette.mode === 'light' ? LoginLight : LoginDark}
+          src={theme.palette.mode === 'dark' ? RegisterDark : RegisterLight}
           alt='login-dark'
           style={{ width: 'auto', height: 'auto' }}
         />
@@ -98,7 +103,7 @@ const LoginPage: NextPage<TProps> = () => {
           }}
         >
           <Typography component='h1' variant='h5'>
-            Sign in
+            Register
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' noValidate>
             <Box mt={2} width='300px'>
@@ -145,6 +150,33 @@ const LoginPage: NextPage<TProps> = () => {
                     error={Boolean(errors?.password)}
                     // helperText={errors?.password?.message}
                     type={showPassword ? 'text' : 'password'}
+                  />
+                )}
+                name='password'
+              />
+              {errors.password && (
+                <Typography sx={{ color: 'red', fontSize: '12px' }}>{errors?.password?.message}</Typography>
+              )}
+            </Box>
+
+            <Box mt={2} width='300px'>
+              <Controller
+                control={control}
+                rules={{
+                  required: true
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                  <CustomTextField
+                    required
+                    fullWidth
+                    label='Confirm Password'
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    placeholder='•••••'
+                    value={value}
+                    error={Boolean(errors?.password)}
+                    // helperText={errors?.password?.message}
+                    type={showPassword ? 'text' : 'password'}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
@@ -160,37 +192,22 @@ const LoginPage: NextPage<TProps> = () => {
                     }}
                   />
                 )}
-                name='password'
+                name='ConfirmPassword'
               />
-              {errors.password && (
-                <Typography sx={{ color: 'red', fontSize: '12px' }}>{errors?.password?.message}</Typography>
+              {errors.ConfirmPassword && (
+                <Typography sx={{ color: 'red', fontSize: '12px' }}>{errors?.ConfirmPassword?.message}</Typography>
               )}
             </Box>
-            <Box mt={2} display='flex' justifyContent='space-between' alignItems='center' width='300px'>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    value='remember'
-                    color='primary'
-                    checked={isRemember}
-                    onChange={e => {
-                      setIsRemember(e.target.checked)
-                    }}
-                  />
-                }
-                label='Remember me'
-              />
-              <Link href='#'>Forgot password?</Link>
-            </Box>
+
             <Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-              Sign In
+              Register
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href='#'>{"Don't have an account? "}</Link>
+                <Link href='#'>{'Do you already have an account? '} </Link>
               </Grid>
               <Grid item>
-                <Link href='/register'>{'Sign Up'}</Link>
+                <Link href='/login'>{'Login'}</Link>
               </Grid>
             </Grid>
             <Typography sx={{ mt: 2, textAlign: 'center' }} variant='body2'>
@@ -213,4 +230,4 @@ const LoginPage: NextPage<TProps> = () => {
     </Box>
   )
 }
-export default LoginPage
+export default RegisterPage
