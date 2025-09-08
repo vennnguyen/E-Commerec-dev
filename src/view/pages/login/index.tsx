@@ -23,12 +23,16 @@ import LoginDark from '/public/images/login-dark.png'
 import LoginLight from '/public/images/login-light.png'
 import FacebookSvg from '/public/svgs/facebooksvg.svg'
 import GoogleSvg from '/public/svgs/googlesvg.svg'
+//hooks
+import { useAuth } from 'src/hooks/useAuth'
 
 type TProps = {}
 const LoginPage: NextPage<TProps> = () => {
   //state
   const [showPassword, setShowPassword] = useState(false)
   const [isRemember, setIsRemember] = useState(false)
+  //context
+  const { login } = useAuth()
   //theme
   const theme = useTheme()
   //form
@@ -54,6 +58,7 @@ const LoginPage: NextPage<TProps> = () => {
   })
   //submit
   const onSubmit = (data: { email: string; password: string }) => {
+    login({ ...data, rememberMe: isRemember })
     console.log('data', data)
   }
   return (
@@ -193,7 +198,7 @@ const LoginPage: NextPage<TProps> = () => {
                 <Link
                   href='/register'
                   style={{
-                    color: theme.palette.mode === 'light' ? theme.palette.common.black : theme.palette.common.white
+                    color: theme.palette.primary.main
                   }}
                 >
                   {'Sign Up'}
