@@ -207,7 +207,14 @@ const RegisterPage: NextPage<TProps> = () => {
                 <Link href='#'>{'Do you already have an account? '} </Link>
               </Grid>
               <Grid item>
-                <Link href='/login'>{'Login'}</Link>
+                <Link
+                  href='/login'
+                  style={{
+                    color: theme.palette.mode === 'light' ? theme.palette.common.black : theme.palette.common.white
+                  }}
+                >
+                  {'Login'}
+                </Link>
               </Grid>
             </Grid>
             <Typography sx={{ mt: 2, textAlign: 'center' }} variant='body2'>

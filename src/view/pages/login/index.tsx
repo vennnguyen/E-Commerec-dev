@@ -190,7 +190,14 @@ const LoginPage: NextPage<TProps> = () => {
                 <Link href='#'>{"Don't have an account? "}</Link>
               </Grid>
               <Grid item>
-                <Link href='/register'>{'Sign Up'}</Link>
+                <Link
+                  href='/register'
+                  style={{
+                    color: theme.palette.mode === 'light' ? theme.palette.common.black : theme.palette.common.white
+                  }}
+                >
+                  {'Sign Up'}
+                </Link>
               </Grid>
             </Grid>
             <Typography sx={{ mt: 2, textAlign: 'center' }} variant='body2'>
