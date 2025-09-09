@@ -14,7 +14,7 @@ import IconButton from '@mui/material/IconButton'
 import Badge from '@mui/material/Badge'
 import Container from '@mui/material/Container'
 //Layout
-import { mainListItems, secondaryListItems } from './ListItems'
+
 import HorizontalLayout from './HorizontalLayout'
 import VerticalLayout from './VerticalLayout'
 import themeConfig from 'src/configs/themeConfig'
