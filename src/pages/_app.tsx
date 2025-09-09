@@ -37,6 +37,9 @@ import ReactHotToast from 'src/components/react-hot-toast'
 import { useSettings } from 'src/hooks/useSettings'
 import ThemeComponent from 'src/theme/ThemeComponent'
 
+// layout
+import UserLayout from '../view/layout/UserLayout'
+
 type ExtendedAppProps = AppProps & {
   Component: NextPage
 }
@@ -75,8 +78,7 @@ export default function App(props: ExtendedAppProps) {
 
   const { settings } = useSettings()
 
-  // Variables
-  const getLayout = Component.getLayout ?? (page => <>{page}</>)
+  const getLayout = Component.getLayout ?? ((page: ReactNode) => <UserLayout>{page}</UserLayout>)
 
   const setConfig = Component.setConfig ?? undefined
 

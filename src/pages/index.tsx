@@ -9,7 +9,6 @@ import { useSettings } from 'src/hooks/useSettings'
 export default function Home() {
   const theme = useTheme()
   const { settings } = useSettings()
-  console.log('theme', { theme, settings })
 
   // const fetchApiUser = async () => {
   //   const response = await fetch('https://jsonplaceholder.typicode.com/users')
@@ -32,7 +31,7 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <Typography>Hello Word Update</Typography>
+      {/* <Typography>Hello Word Update</Typography> */}
     </>
   )
 }
