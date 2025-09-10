@@ -15,25 +15,20 @@ import HorizontalLayout from './HorizontalLayout'
 import VerticalLayout from './VerticalLayout'
 import themeConfig from 'src/configs/themeConfig'
 
-type TProps = {
+interface TProps {
   children: React.ReactNode
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const theme = themeConfig
-const UserLayout: NextPage<TProps> = ({ children }) => {
-  const [open, setOpen] = React.useState(true)
-  const toggleDrawer = () => {
-    setOpen(!open)
-  }
+const LayoutNotApp: NextPage<TProps> = ({ children }) => {
+  const [open, setOpen] = React.useState(false)
 
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <HorizontalLayout open={open} toggleDrawer={toggleDrawer} />
-        <VerticalLayout open={open} toggleDrawer={toggleDrawer} />
-
+        <HorizontalLayout open={false} toggleDrawer={() => {}} isHideMenu={false} />
         <Box
           component='main'
           sx={{
@@ -53,4 +48,4 @@ const UserLayout: NextPage<TProps> = ({ children }) => {
     </ThemeProvider>
   )
 }
-export default UserLayout
+export default LayoutNotApp

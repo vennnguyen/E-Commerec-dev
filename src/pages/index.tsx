@@ -2,9 +2,11 @@
 import { Box, Typography, useTheme } from '@mui/material'
 import axios from 'axios'
 import Head from 'next/head'
-import { useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
 import CustomTextField from 'src/components/text-field'
 import { useSettings } from 'src/hooks/useSettings'
+import LayoutNotApp from 'src/view/layout/LayoutNotApp'
+import UserLayout from 'src/view/layout/UserLayout'
 
 export default function Home() {
   const theme = useTheme()
@@ -35,3 +37,4 @@ export default function Home() {
     </>
   )
 }
+Home.getLayout = (page: ReactNode) => <LayoutNotApp>{page}</LayoutNotApp>
