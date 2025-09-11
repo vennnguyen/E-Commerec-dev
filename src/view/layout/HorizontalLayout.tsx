@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton'
 import Badge from '@mui/material/Badge'
 import IconifyIcon from 'src/components/Icon'
 import { Icon } from '@mui/material'
+import UserDropDown from 'src/components/user-dropdown'
 
 const drawerWidth: number = 240
 type TProps = {
@@ -50,7 +51,7 @@ const AppBar = styled(MuiAppBar, {
 
 const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) => {
   return (
-    <AppBar position='absolute' open={open}>
+    <AppBar position='absolute' open={open} sx={{ backgroundColor: 'transparent', paddingTop: '4px' }}>
       <Toolbar
         sx={{
           pr: '30px', // keep right padding when drawer closed
@@ -77,12 +78,13 @@ const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) 
         <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
           Dashboard
         </Typography>
-        <IconButton color='inherit'>
+        <UserDropDown />
+        {/* <IconButton color='inherit'>
           <Badge badgeContent={4} color='secondary'>
-            {/* <NotificationsIcon /> */}
+            
             <IconifyIcon icon='ic:round-notifications' />
           </Badge>
-        </IconButton>
+        </IconButton> */}
       </Toolbar>
     </AppBar>
   )
