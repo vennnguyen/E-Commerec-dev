@@ -21,7 +21,7 @@ const GuestGuard = (props: GuestGuardProps) => {
       router.replace('/')
     }
   }, [router.route])
-  if (authContext.loading) return fallback
+  // if (authContext.loading) return fallback
   return <>{children}</>
 }
 

@@ -73,6 +73,8 @@ const AuthProvider = ({ children }: Props) => {
   }, [])
 
   const handleLogin = (params: LoginParams, errorCallback?: ErrCallbackType) => {
+    console.log('params', params)
+
     loginAuth({ email: params.email, password: params.password })
       .then(async response => {
         params.rememberMe

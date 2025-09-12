@@ -60,6 +60,7 @@ const LoginPage: NextPage<TProps> = () => {
   const onSubmit = (data: { email: string; password: string }) => {
     login({ ...data, rememberMe: isRemember })
     console.log('data', data)
+    console.log('ok')
   }
   return (
     <Box
@@ -102,7 +103,8 @@ const LoginPage: NextPage<TProps> = () => {
             alignItems: 'center'
           }}
         >
-          <Typography component='h1' variant='h5'>
+          <Typography component='h1' variant='h5' onClick={()=>{console.log("ok");
+          }}>
             Sign in
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' noValidate>
