@@ -20,10 +20,14 @@ const AuthGuard = ({ children, fallback }: AuthGuardProps) => {
 
     if (!authContext.user && (!accessToken || !refreshToken)) {
       // Không có token thì đá về login
-      router.replace({
-        pathname: '/login',
-        query: { returnUrl: router.asPath }
-      })
+      if (router.asPath !== '/') {
+        router.replace({
+          pathname: '/login',
+          query: { returnUrl: router.asPath }
+        })
+      } else {
+        router.replace('/login')
+      }
       authContext.setUser(null)
       removeUserData()
     }
