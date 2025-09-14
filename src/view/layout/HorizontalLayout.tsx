@@ -14,7 +14,8 @@ import IconButton from '@mui/material/IconButton'
 import Badge from '@mui/material/Badge'
 import IconifyIcon from 'src/components/Icon'
 import { Icon } from '@mui/material'
-import UserDropDown from 'src/components/user-dropdown'
+import UserDropDown from 'src/view/layout/components/user-dropdown'
+import ModeToggle from './components/mode-toggle'
 
 const drawerWidth: number = 240
 type TProps = {
@@ -78,6 +79,7 @@ const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) 
         <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
           Dashboard
         </Typography>
+        <ModeToggle />
         <UserDropDown />
         {/* <IconButton color='inherit'>
           <Badge badgeContent={4} color='secondary'>

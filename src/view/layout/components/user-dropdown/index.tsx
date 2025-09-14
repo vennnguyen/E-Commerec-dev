@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography'
 import Tooltip from '@mui/material/Tooltip'
 import { useAuth } from 'src/hooks/useAuth'
 import Image from 'next/image'
-import IconifyIcon from '../Icon'
+import IconifyIcon from '../../../../components/Icon'
 
 type TProps = {}
 const UserDropDown = (props: TProps) => {
