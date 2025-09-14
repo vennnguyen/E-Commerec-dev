@@ -14,9 +14,12 @@ import Tooltip from '@mui/material/Tooltip'
 import { useAuth } from 'src/hooks/useAuth'
 import Image from 'next/image'
 import IconifyIcon from '../../../../components/Icon'
+import { useTranslation } from 'react-i18next'
 
 type TProps = {}
 const UserDropDown = (props: TProps) => {
+  //translate
+  const { t } = useTranslation()
   const { user, logout } = useAuth()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -29,7 +32,7 @@ const UserDropDown = (props: TProps) => {
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title='Account settings'>
+        <Tooltip title={t('Account settings')}>
           <IconButton
             onClick={handleClick}
             size='small'

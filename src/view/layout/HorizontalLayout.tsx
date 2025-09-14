@@ -16,6 +16,7 @@ import IconifyIcon from 'src/components/Icon'
 import { Icon } from '@mui/material'
 import UserDropDown from 'src/view/layout/components/user-dropdown'
 import ModeToggle from './components/mode-toggle'
+import LanguageDropDown from './components/language-dropdown'
 
 const drawerWidth: number = 240
 type TProps = {
@@ -79,11 +80,11 @@ const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) 
         <Typography component='h1' variant='h6' color='inherit' noWrap sx={{ flexGrow: 1 }}>
           Dashboard
         </Typography>
+        <LanguageDropDown />
         <ModeToggle />
         <UserDropDown />
         {/* <IconButton color='inherit'>
           <Badge badgeContent={4} color='secondary'>
-            
             <IconifyIcon icon='ic:round-notifications' />
           </Badge>
         </IconButton> */}

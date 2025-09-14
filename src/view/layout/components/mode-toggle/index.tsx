@@ -16,7 +16,7 @@ const ModeToggle = (props: TProps) => {
     <IconButton color='inherit' onClick={() => handleChangeMode(settings.mode === 'light' ? 'dark' : 'light')}>
       <IconifyIcon
         icon={
-          settings.mode === 'light' ? 'material-symbols-light:light-mode-outline' : 'material-symbols-light:dark-mode'
+          settings.mode === 'light' ? 'material-symbols-light:dark-mode' : 'material-symbols-light:light-mode-outline'
         }
       />
     </IconButton>
