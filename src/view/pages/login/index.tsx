@@ -81,7 +81,7 @@ const LoginPage: NextPage<TProps> = () => {
         sx={{
           justifyContent: 'center',
           alignItems: 'center',
-          borderRadius: '20px',
+          borderRadius: theme.shape.borderRadius,
           backgroundColor: theme.palette.customColors.bodyBg,
           height: '100%',
           minWidth: '50vw'
@@ -103,8 +103,13 @@ const LoginPage: NextPage<TProps> = () => {
             alignItems: 'center'
           }}
         >
-          <Typography component='h1' variant='h5' onClick={()=>{console.log("ok");
-          }}>
+          <Typography
+            component='h1'
+            variant='h5'
+            onClick={() => {
+              console.log('ok')
+            }}
+          >
             Sign in
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' noValidate>

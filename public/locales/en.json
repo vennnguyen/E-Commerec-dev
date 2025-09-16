@@ -1,3 +1,19 @@
 {
-  "Account settings": "Account settings"
+  "Account settings": "Account settings",
+  "My Profile": "My Profile",
+
+  "enter_your_email": "Enter your email",
+  "Role": "Role Group",
+  "enter_your_role": "Select your role",
+  "Full_name": "Full name",
+  "Address": "Address",
+  "City": "City",
+  "Phone_number": "Phone number",
+  "enter_your_city": "Select your city",
+  "enter_your_full_name": "Enter your full name",
+  "enter_your_phone": "Enter your phone number",
+  "enter_your_address": "Enter your address",
+  "upload_avatar": "Upload avatar",
+  "change_avatar": "Change avatar",
+  "Update": "Update"
 }

@@ -20,7 +20,7 @@ const AuthGuard = ({ children, fallback }: AuthGuardProps) => {
 
     if (!authContext.user && (!accessToken || !refreshToken)) {
       // Không có token thì đá về login
-      if (router.asPath !== '/') {
+      if (router.asPath !== '/' && router.asPath !== '/login') {
         router.replace({
           pathname: '/login',
           query: { returnUrl: router.asPath }

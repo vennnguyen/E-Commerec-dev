@@ -1,22 +1,24 @@
+//react
 import * as React from 'react'
+//next
+import { useRouter } from 'next/router'
 import { NextPage } from 'next'
 //MUI
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles'
-
-import MuiDrawer from '@mui/material/Drawer'
-import Box from '@mui/material/Box'
+import { styled } from '@mui/material/styles'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-
 import Typography from '@mui/material/Typography'
-
 import IconButton from '@mui/material/IconButton'
-import Badge from '@mui/material/Badge'
+//component
 import IconifyIcon from 'src/components/Icon'
-import { Icon } from '@mui/material'
 import UserDropDown from 'src/view/layout/components/user-dropdown'
 import ModeToggle from './components/mode-toggle'
 import LanguageDropDown from './components/language-dropdown'
+import { Button } from '@mui/material'
+//hooks
+import { useAuth } from 'src/hooks/useAuth'
+//config
+import { ROUTE } from 'src/configs/route'
 
 const drawerWidth: number = 240
 type TProps = {
@@ -52,6 +54,8 @@ const AppBar = styled(MuiAppBar, {
 }))
 
 const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) => {
+  const { user } = useAuth()
+  const router = useRouter()
   return (
     <AppBar position='absolute' open={open} sx={{ backgroundColor: 'transparent', paddingTop: '4px' }}>
       <Toolbar
@@ -82,7 +86,20 @@ const HorizontalLayout: NextPage<TProps> = ({ open, toggleDrawer, isHideMenu }) 
         </Typography>
         <LanguageDropDown />
         <ModeToggle />
-        <UserDropDown />
+        {user ? (
+          <UserDropDown />
+        ) : (
+          <Button
+            type='submit'
+            variant='contained'
+            sx={{ width: 'auto', ml: 2 }}
+            onClick={() => {
+              router.push(`${ROUTE.LOGIN}`)
+            }}
+          >
+            Sign In
+          </Button>
+        )}
         {/* <IconButton color='inherit'>
           <Badge badgeContent={4} color='secondary'>
             <IconifyIcon icon='ic:round-notifications' />

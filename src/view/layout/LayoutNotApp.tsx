@@ -12,40 +12,48 @@ import Container from '@mui/material/Container'
 //Layout
 
 import HorizontalLayout from './HorizontalLayout'
-import VerticalLayout from './VerticalLayout'
-import themeConfig from 'src/configs/themeConfig'
+
+import { useTheme } from '@emotion/react'
 
 interface TProps {
   children: React.ReactNode
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const theme = themeConfig
+// const theme = useTheme()
 const LayoutNotApp: NextPage<TProps> = ({ children }) => {
   const [open, setOpen] = React.useState(false)
-
+  const theme = useTheme()
   return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
-        <HorizontalLayout open={false} toggleDrawer={() => {}} isHideMenu={false} />
-        <Box
-          component='main'
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <HorizontalLayout open={false} toggleDrawer={() => {}} isHideMenu={false} />
+      <Box
+        component='main'
+        sx={{
+          backgroundColor: theme =>
+            theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
+          flexGrow: 1,
+          height: '100vh',
+          overflow: 'auto'
+        }}
+      >
+        <Toolbar />
+        <Container
           sx={{
-            backgroundColor: theme =>
-              theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto'
+            m: 4,
+            width: 'calc(100vw - 32px)',
+            maxWidth: 'unset !important',
+            overflow: 'auto',
+            maxHeight: `calc(100vh - ${theme.mixins.toolbar.minHeight} - 32px)`,
+            padding: '0 !important',
+            borderRadius: '15px'
           }}
         >
-          <Toolbar />
-          <Container maxWidth='lg' sx={{ mt: 4, mb: 4 }}>
-            {children}
-          </Container>
-        </Box>
+          {children}
+        </Container>
       </Box>
-    </ThemeProvider>
+    </Box>
   )
 }
 export default LayoutNotApp
