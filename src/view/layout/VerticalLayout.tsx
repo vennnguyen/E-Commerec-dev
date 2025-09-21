@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 //Next
 import { NextPage } from 'next'
-import IconifyIcon from 'src/components/Icon'
+//component
 import ListVertical from './ListVertical'
 
 const drawerWidth: number = 240

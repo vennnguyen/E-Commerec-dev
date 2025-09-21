@@ -1,7 +1,8 @@
-// ** React Imports
+// *MUI
 
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+//view
 import BlankLayout from 'src/view/layout/BlankLayout'
 
 const Error404 = () => {

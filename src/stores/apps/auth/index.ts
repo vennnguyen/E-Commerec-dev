@@ -1,13 +1,9 @@
 // ** Redux Imports
 import { Dispatch } from 'redux'
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
-// ** Axios Imports
-import axios from 'axios'
-import { registerAuth } from 'src/service/auth'
-import { registerAuthAsync } from './actions'
-import { tree } from 'next/dist/build/templates/app-page'
-import { error } from 'console'
+// ** redux action
+import { registerAuthAsync, updateAuthMeAsync } from './actions'
 
 interface DataParams {
   q: string
@@ -25,7 +21,10 @@ const initialState = {
   isSuccess: true,
   isError: false,
   message: '',
-  error: ''
+  error: '',
+  isSuccessUpdateMe: true,
+  isErrorUpdateMe: false,
+  messageUpdateMe: ''
 }
 
 export const authSlice = createSlice({
@@ -39,9 +38,13 @@ export const authSlice = createSlice({
       state.isError = true
       state.message = ''
       state.error = ''
+      state.isSuccessUpdateMe = false
+      state.isErrorUpdateMe = true
+      state.messageUpdateMe = ''
     }
   },
   extraReducers: builder => {
+    // ** register
     builder.addCase(registerAuthAsync.pending, (state, action) => {
       state.isLoading = true
     })
@@ -59,6 +62,24 @@ export const authSlice = createSlice({
       state.isSuccess = false
       state.isError = true
       state.message = ''
+      state.error = ''
+    })
+    // ** update me
+    builder.addCase(updateAuthMeAsync.pending, (state, action) => {
+      state.isLoading = true
+    })
+    builder.addCase(updateAuthMeAsync.fulfilled, (state, action) => {
+      state.isLoading = false
+      state.isSuccessUpdateMe = !!action.payload?.data?.email
+      state.isErrorUpdateMe = !action.payload?.data?.email
+      state.messageUpdateMe = action.payload?.message
+      state.error = action.payload?.error
+    })
+    builder.addCase(updateAuthMeAsync.rejected, (state, action) => {
+      state.isLoading = false
+      state.isSuccessUpdateMe = false
+      state.isErrorUpdateMe = true
+      state.messageUpdateMe = ''
       state.error = ''
     })
   }

@@ -1,7 +1,6 @@
 //react
 import * as React from 'react'
 //MUI
-
 import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
@@ -9,13 +8,17 @@ import MenuItem from '@mui/material/MenuItem'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Tooltip from '@mui/material/Tooltip'
+//hooks
 import { useAuth } from 'src/hooks/useAuth'
+//next
 import Image from 'next/image'
-import IconifyIcon from '../../../../components/Icon'
-import { useTranslation } from 'react-i18next'
 import { useRouter } from 'next/router'
+//icon
+import IconifyIcon from '../../../../components/Icon'
+//translate
+import { useTranslation } from 'react-i18next'
+//config
 import { ROUTE } from 'src/configs/route'
 
 type TProps = {}

@@ -1,6 +1,10 @@
+//MUI
 import { Icon, IconButton } from '@mui/material'
+//component
 import IconifyIcon from 'src/components/Icon'
+//hooks
 import { useSettings } from 'src/hooks/useSettings'
+//types
 import { Mode } from 'src/types/layouts'
 
 type TProps = {}

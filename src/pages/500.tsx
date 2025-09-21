@@ -1,4 +1,6 @@
+//MUI
 import Typography from '@mui/material/Typography'
+//view
 import BlankLayout from 'src/view/layout/BlankLayout'
 
 const Error500 = () => {

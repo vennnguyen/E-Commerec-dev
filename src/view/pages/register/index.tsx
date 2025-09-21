@@ -1,23 +1,23 @@
 // next
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { NextPage } from 'next'
+//react
+import { useEffect, useState } from 'react'
 //MUI
-import { Checkbox, IconButton, InputAdornment, useTheme } from '@mui/material'
-import { Button, CssBaseline, FormControlLabel, Typography, Box, Grid, TextField } from '@mui/material'
-
+import { IconButton, InputAdornment, useTheme } from '@mui/material'
+import { Button, CssBaseline, Typography, Box, Grid } from '@mui/material'
 // validation
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-
 //regex
 import { EMAIL_REG, PASSWORD_REG } from 'src/configs/regex'
 //components
 import CustomTextField from 'src/components/text-field'
 import IconifyIcon from 'src/components/Icon'
+import FallbackSpinner from 'src/components/fall-back'
 //image
 import RegisterDark from '/public/images/register-dark.png'
 import RegisterLight from '/public/images/register-light.png'
@@ -25,19 +25,19 @@ import FacebookSvg from '/public/svgs/facebooksvg.svg'
 import GoogleSvg from '/public/svgs/googlesvg.svg'
 //redux(thunk)
 import { useDispatch, useSelector } from 'react-redux'
-import { registerAuthAsync } from 'src/stores/apps/auth/actions'
-import { AppDispatch, RootState } from 'src/stores'
+//toast
 import toast from 'react-hot-toast'
-import FallbackSpinner from 'src/components/fall-back'
+//store
+import { registerAuthAsync } from 'src/stores/apps/auth/actions'
 import { resetInitialState } from 'src/stores/apps/auth'
-import { useRouter } from 'next/router'
+import { AppDispatch, RootState } from 'src/stores'
+//config
 import { ROUTE } from 'src/configs/route'
 
 type TProps = {}
 const RegisterPage: NextPage<TProps> = () => {
   //state
   const [showPassword, setShowPassword] = useState(false)
-  const [isRemember, setIsRemember] = useState(false)
   //redux
   const dispatch: AppDispatch = useDispatch()
   const { isLoading, isError, isSuccess, message, error } = useSelector((state: RootState) => state.auth)

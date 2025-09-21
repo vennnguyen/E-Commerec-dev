@@ -1,18 +1,15 @@
+//react
 import * as React from 'react'
+//next
 import { NextPage } from 'next'
 //MUI
-import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-
 import Box from '@mui/material/Box'
-
 import Toolbar from '@mui/material/Toolbar'
-
 import Container from '@mui/material/Container'
 //Layout
-
 import HorizontalLayout from './HorizontalLayout'
-
+//theme
 import { useTheme } from '@emotion/react'
 
 interface TProps {

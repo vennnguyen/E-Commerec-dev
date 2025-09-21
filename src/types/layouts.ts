@@ -1,8 +1,10 @@
 1 // ** Type Imports
 import { ReactNode } from 'react'
+// ** MUI Imports
 import { AppBarProps } from '@mui/material/AppBar'
 import { Theme, SxProps, PaletteMode } from '@mui/material'
 import { SwipeableDrawerProps } from '@mui/material/SwipeableDrawer'
+// ** Context
 import { Settings } from 'src/contexts/SettingsContext'
 
 export type Layout = 'vertical' | 'horizontal' | 'blank' | 'blankWithAppBar'

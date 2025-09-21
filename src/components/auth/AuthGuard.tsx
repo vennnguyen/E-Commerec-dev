@@ -1,6 +1,10 @@
+//next
 import { useRouter } from 'next/router'
+//react
 import { ReactNode, ReactElement, useEffect } from 'react'
+//helper
 import { removeUserData } from 'src/helper/storage'
+//hooks
 import { useAuth } from 'src/hooks/useAuth'
 
 interface AuthGuardProps {

@@ -1,3 +1,4 @@
+//check role
 import { AbilityBuilder, Ability } from '@casl/ability'
 
 export type Subjects = string

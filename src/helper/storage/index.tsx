@@ -1,3 +1,4 @@
+//config
 import { ACCESS_TOKEN, REFRESH_TOKEN, USER_DATA } from 'src/configs/auth'
 
 export const setUserData = (data: string, accessToken: string, refreshToken: string) => {

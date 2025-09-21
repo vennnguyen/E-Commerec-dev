@@ -9,12 +9,13 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
+import { Button } from '@mui/material'
 //component
 import IconifyIcon from 'src/components/Icon'
-import UserDropDown from 'src/view/layout/components/user-dropdown'
 import ModeToggle from './components/mode-toggle'
 import LanguageDropDown from './components/language-dropdown'
-import { Button } from '@mui/material'
+//view
+import UserDropDown from 'src/view/layout/components/user-dropdown'
 //hooks
 import { useAuth } from 'src/hooks/useAuth'
 //config
