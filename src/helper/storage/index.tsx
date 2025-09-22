@@ -13,8 +13,8 @@ export const getUserData = () => {
   if (typeof window !== 'undefined') {
     return {
       UserData: window.localStorage.getItem(USER_DATA),
-      AccessToken: window.localStorage.getItem(ACCESS_TOKEN),
-      RefreshToken: window.localStorage.getItem(REFRESH_TOKEN)
+      accessToken: window.localStorage.getItem(ACCESS_TOKEN),
+      refreshToken: window.localStorage.getItem(REFRESH_TOKEN)
     }
   }
   return {

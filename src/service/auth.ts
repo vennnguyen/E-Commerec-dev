@@ -9,19 +9,15 @@ import instanceAxios from 'src/helper/axios'
 import { TLoginAuth, TRegisterAuth } from 'src/types/auth/auth'
 
 export const loginAuth = async (data: TLoginAuth) => {
-  try {
-    const res = await instanceAxios.post(`${CONFIG_API.AUTH.INDEX}/login`, data)
-    return res.data
-  } catch (error) {
-    return null
-  }
+  const res = await axios.post(`${CONFIG_API.AUTH.INDEX}/login`, data)
+  return res.data
 }
 export const logoutAuth = async () => {
   try {
     const res = await instanceAxios.post(`${CONFIG_API.AUTH.INDEX}/logout`)
     return res.data
   } catch (error) {
-    return null
+    return error
   }
 }
 export const registerAuth = async (data: TRegisterAuth) => {
@@ -47,7 +43,7 @@ export const updateAuthMe = async (data: any) => {
     const res = await instanceAxios.put(`${CONFIG_API.AUTH.INDEX}/me`, data)
     return res.data
   } catch (error) {
-    return null
+    return error
   }
 }
 
@@ -56,6 +52,6 @@ export const getAuthMe = async () => {
     const res = await instanceAxios.get(`${CONFIG_API.AUTH.INDEX}/me`)
     return res.data
   } catch (error) {
-    return null
+    return error
   }
 }

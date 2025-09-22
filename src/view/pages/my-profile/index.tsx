@@ -28,7 +28,7 @@ import { useTranslation } from 'react-i18next'
 import { getAuthMe } from 'src/service/auth'
 
 // ** Utils
-import { toBase64, toFullName } from 'src/utils'
+import { separationFullName, toBase64, toFullName } from 'src/utils'
 
 // ** Redux
 import { updateAuthMeAsync } from 'src/stores/apps/auth/actions'
@@ -41,6 +41,7 @@ import FallbackSpinner from 'src/components/fall-back'
 
 // ** Other
 import toast from 'react-hot-toast'
+import { useAuth } from 'src/hooks/useAuth'
 
 type TProps = {}
 
@@ -141,17 +142,16 @@ const MyProfilePage: NextPage<TProps> = () => {
   }, [isErrorUpdateMe, isSuccessUpdateMe, messageUpdateMe])
 
   const onSubmit = (data: any) => {
-    console.log('data', data)
-
-    // const { firstName, lastName, middleName } = separationFullName(data.fullName, i18n.language)
+    const { firstName, lastName, middleName } = separationFullName(data.fullName, i18n.language)
     dispatch(
       updateAuthMeAsync({
         email: data.email,
-        firstName: data.fullName,
-
+        firstName: firstName,
+        middleName: middleName,
+        lastName: lastName,
         role: roleId,
         phoneNumber: data.phoneNumber,
-        avatar,
+        avatar: avatar,
         address: data.address
         // city: data.city
       })

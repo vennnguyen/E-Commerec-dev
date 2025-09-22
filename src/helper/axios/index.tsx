@@ -1,28 +1,33 @@
-//lib
+// ** libraries
 import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
-//config
-import { BASE_URL, CONFIG_API } from 'src/configs/api'
-//storage
-import { getUserData, removeUserData } from '../storage'
 
-//next
+// ** config
+import { BASE_URL, CONFIG_API } from 'src/configs/api'
+
+// ** helper
+import { removeUserData, getUserData } from 'src/helper/storage'
+
+// ** Next
 import { NextRouter, useRouter } from 'next/router'
-//react
-import React, { FC } from 'react'
-//types
+
+// ** React
+import { FC } from 'react'
+
+// types
 import { UserDataType } from 'src/contexts/types'
-//hooks
+
+// ** hooks
 import { useAuth } from 'src/hooks/useAuth'
 
-const instanceAxios = axios.create({
-  baseURL: BASE_URL
-})
-type TAxiosInterceptors = {
+type TAxiosInterceptor = {
   children: React.ReactNode
 }
+
+const instanceAxios = axios.create({ baseURL: BASE_URL })
+
 const handleRedirectLogin = (router: NextRouter, setUser: (data: UserDataType | null) => void) => {
-  if (router.asPath !== '/') {
+  if (router.asPath !== '/' || router.pathname !== '/login') {
     router.replace({
       pathname: '/login',
       query: { returnUrl: router.asPath }
@@ -33,34 +38,37 @@ const handleRedirectLogin = (router: NextRouter, setUser: (data: UserDataType | 
   setUser(null)
   removeUserData()
 }
-const AxiosInterceptors: FC<TAxiosInterceptors> = ({ children }) => {
+
+const AxiosInterceptors: FC<TAxiosInterceptor> = ({ children }) => {
   const router = useRouter()
-  const { AccessToken, RefreshToken } = getUserData()
+  const { accessToken, refreshToken } = getUserData()
   const { setUser } = useAuth()
+
   instanceAxios.interceptors.request.use(async config => {
-    if (AccessToken) {
-      const decodedAccessToken: any = jwtDecode(AccessToken)
+    if (accessToken) {
+      const decodedAccessToken: any = jwtDecode(accessToken)
+
       if (decodedAccessToken?.exp > Date.now() / 1000) {
-        config.headers['Authorization'] = `Bearer ${AccessToken}`
+        config.headers['Authorization'] = `Bearer ${accessToken}`
       } else {
-        if (RefreshToken) {
-          const decodedRefreshToken: any = jwtDecode(RefreshToken)
+        if (refreshToken) {
+          const decodedRefreshToken: any = jwtDecode(refreshToken)
+
           if (decodedRefreshToken?.exp > Date.now() / 1000) {
-            //call api tạo new access token
             await axios
               .post(
                 `${CONFIG_API.AUTH.INDEX}/refresh-token`,
                 {},
                 {
                   headers: {
-                    Authorization: `Bearer ${RefreshToken}`
+                    Authorization: `Bearer ${refreshToken}`
                   }
                 }
               )
               .then(res => {
-                const NewAccessToken = res.data.data.access_token
-                if (NewAccessToken) {
-                  config.headers['Authorization'] = `Bearer ${AccessToken}`
+                const newAccessToken = res?.data?.data?.access_token
+                if (newAccessToken) {
+                  config.headers['Authorization'] = `Bearer ${newAccessToken}`
                 } else {
                   handleRedirectLogin(router, setUser)
                 }
@@ -78,11 +86,14 @@ const AxiosInterceptors: FC<TAxiosInterceptors> = ({ children }) => {
     } else {
       handleRedirectLogin(router, setUser)
     }
+
     return config
   })
+
   instanceAxios.interceptors.response.use(response => {
     return response
   })
+
   return <>{children}</>
 }
 
