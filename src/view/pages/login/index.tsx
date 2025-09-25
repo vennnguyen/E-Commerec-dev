@@ -25,6 +25,9 @@ import FacebookSvg from '/public/svgs/facebooksvg.svg'
 import GoogleSvg from '/public/svgs/googlesvg.svg'
 //hooks
 import { useAuth } from 'src/hooks/useAuth'
+import toast from 'react-hot-toast'
+//translate
+import { useTranslation } from 'react-i18next'
 
 type TProps = {}
 const LoginPage: NextPage<TProps> = () => {
@@ -35,6 +38,8 @@ const LoginPage: NextPage<TProps> = () => {
   const { login } = useAuth()
   //theme
   const theme = useTheme()
+  //translate
+  const { t } = useTranslation()
   //form
   const schema = yup.object().shape({
     email: yup.string().required('This field is required').matches(EMAIL_REG, 'Email is not valid'),
@@ -47,6 +52,7 @@ const LoginPage: NextPage<TProps> = () => {
   const {
     handleSubmit,
     control,
+    setError,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -58,9 +64,13 @@ const LoginPage: NextPage<TProps> = () => {
   })
   //submit
   const onSubmit = (data: { email: string; password: string }) => {
-    login({ ...data, rememberMe: isRemember })
-    console.log('data', data)
-    console.log('ok')
+    if (!Object.keys(errors).length) {
+      login({ ...data, rememberMe: isRemember }, err => {
+        if (err?.response?.data?.typeError === 'INVALID') {
+          toast.error(t('the_email_or_password_is_incorrect'))
+        }
+      })
+    }
   }
   return (
     <Box
