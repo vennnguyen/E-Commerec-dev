@@ -10,7 +10,6 @@ import Box from '@mui/material/Box'
 import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
@@ -198,7 +197,7 @@ const UserDropdown = (props: TProps) => {
           <Avatar sx={{ backgroundColor: 'transparent' }}>
             <IconifyIcon icon='hugeicons:reset-password' />
           </Avatar>
-          {t('change_password')}
+          {t('Change_password')}
         </MenuItem>
         <MenuItem onClick={logout}>
           <Avatar sx={{ backgroundColor: 'transparent' }}>

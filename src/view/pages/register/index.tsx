@@ -73,8 +73,9 @@ const RegisterPage: NextPage<TProps> = () => {
   })
   //submit
   const onSubmit = (data: { email: string; password: string }) => {
-    dispatch(registerAuthAsync({ email: data.email, password: data.password }))
-    // console.log('data', data)
+    if (!Object.keys(errors)?.length) {
+      dispatch(registerAuthAsync({ email: data.email, password: data.password }))
+    }
   }
   useEffect(() => {
     if (message) {

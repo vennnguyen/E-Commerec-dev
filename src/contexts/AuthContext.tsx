@@ -6,19 +6,22 @@ import { useRouter } from 'next/router'
 
 // ** Config
 import authConfig from 'src/configs/auth'
-import { CONFIG_API } from 'src/configs/api'
+
 // ** Types
 import { AuthValuesType, LoginParams, ErrCallbackType, UserDataType } from './types'
-//service
+
+// ** services
 import { loginAuth, logoutAuth } from 'src/service/auth'
 
-//helper
-import { removeUserData, setUserData } from 'src/helper/storage'
-//axios
+// ** Config
+import { CONFIG_API } from 'src/configs/api'
+
+// ** helper
+import { clearLocalUserData, setLocalUserData, setTemporaryToken } from 'src/helper/storage'
+
+// instance axios
 import instanceAxios from 'src/helper/axios'
-//toast
 import toast from 'react-hot-toast'
-//translate
 import { useTranslation } from 'react-i18next'
 
 // ** Defaults
@@ -38,11 +41,11 @@ type Props = {
 }
 
 const AuthProvider = ({ children }: Props) => {
-  //translate
-  const { t } = useTranslation()
   // ** States
   const [user, setUser] = useState<UserDataType | null>(defaultProvider.user)
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading)
+
+  const { t } = useTranslation()
 
   // ** Hooks
   const router = useRouter()
@@ -50,6 +53,7 @@ const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     const initAuth = async (): Promise<void> => {
       const storedToken = window.localStorage.getItem(authConfig.storageTokenKeyName)
+
       if (storedToken) {
         setLoading(true)
         await instanceAxios
@@ -59,7 +63,7 @@ const AuthProvider = ({ children }: Props) => {
             setUser({ ...response.data.data })
           })
           .catch(() => {
-            removeUserData()
+            clearLocalUserData()
             setUser(null)
             setLoading(false)
             if (!router.pathname.includes('login')) {
@@ -72,22 +76,21 @@ const AuthProvider = ({ children }: Props) => {
     }
 
     initAuth()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleLogin = (params: LoginParams, errorCallback?: ErrCallbackType) => {
     loginAuth({ email: params.email, password: params.password })
       .then(async response => {
-        params.rememberMe
-          ? setUserData(JSON.stringify(response.data.user), response.data.access_token, response.data.refresh_token)
-          : null
-        toast.success(t('login_successfully'))
+        if (params.rememberMe) {
+          setLocalUserData(JSON.stringify(response.data.user), response.data.access_token, response.data.refresh_token)
+        } else {
+          setTemporaryToken(response.data.access_token)
+        }
+
+        toast.success(t('login_success'))
+
         const returnUrl = router.query.returnUrl
-
         setUser({ ...response.data.user })
-
-        console.log(response.data)
-
         const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
 
         router.replace(redirectURL as string)
@@ -99,9 +102,9 @@ const AuthProvider = ({ children }: Props) => {
   }
 
   const handleLogout = () => {
-    logoutAuth().then(rest => {
+    logoutAuth().then(res => {
       setUser(null)
-      removeUserData()
+      clearLocalUserData()
       router.push('/login')
     })
   }
