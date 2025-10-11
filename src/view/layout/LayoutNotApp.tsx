@@ -10,7 +10,7 @@ import Container from '@mui/material/Container'
 //Layout
 import HorizontalLayout from './HorizontalLayout'
 //theme
-import { useTheme } from '@emotion/react'
+import { useTheme } from '@mui/material'
 
 interface TProps {
   children: React.ReactNode
@@ -19,7 +19,7 @@ interface TProps {
 // TODO remove, this demo shouldn't need to reset the theme.
 // const theme = useTheme()
 const LayoutNotApp: NextPage<TProps> = ({ children }) => {
-  const [open, setOpen] = React.useState(false)
+  // const [open, setOpen] = React.useState(false)
   const theme = useTheme()
   return (
     <Box sx={{ display: 'flex' }}>
