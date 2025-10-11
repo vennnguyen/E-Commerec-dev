@@ -25,12 +25,7 @@
     "newline-before-return": "off",
    
     // add new line below import
-    "import/newline-after-import": [
-      "warn",
-      {
-        "count": 0
-      }
-    ],
+    "import/newline-after-import": "off",
     "@typescript-eslint/ban-types": [
       "error",
       {
