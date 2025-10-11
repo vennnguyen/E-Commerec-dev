@@ -121,6 +121,7 @@ const ChangePasswordPage: NextPage<TProps> = () => {
       }
       dispatch(resetInitialState())
     }
+    
   }, [isErrorChangePassword, isSuccessChangePassword, messageChangePassword])
 
   return (

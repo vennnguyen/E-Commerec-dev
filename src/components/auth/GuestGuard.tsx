@@ -20,6 +20,7 @@ const GuestGuard = (props: GuestGuardProps) => {
     if (window.localStorage.getItem('accessToken') && window.localStorage.getItem('refreshToken')) {
       router.replace('/')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.route])
   if (authContext.loading || (!authContext.loading && authContext.user !== null)) return fallback
   return <>{children}</>

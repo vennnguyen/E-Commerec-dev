@@ -26,9 +26,9 @@
    
     // add new line below import
     "import/newline-after-import": [
-      "error",
+      "warn",
       {
-        "count": 1
+        "count": 0
       }
     ],
     "@typescript-eslint/ban-types": [

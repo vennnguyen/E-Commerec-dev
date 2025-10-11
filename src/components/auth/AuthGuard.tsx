@@ -35,6 +35,7 @@ const AuthGuard = ({ children, fallback }: AuthGuardProps) => {
       authContext.setUser(null)
       clearLocalUserData()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady, router.asPath, authContext.user])
 
   if (authContext.loading) return fallback
