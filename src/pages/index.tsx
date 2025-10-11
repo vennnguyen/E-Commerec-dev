@@ -7,6 +7,7 @@ import CustomTextField from 'src/components/text-field'
 import { useSettings } from 'src/hooks/useSettings'
 import LayoutNotApp from 'src/view/layout/LayoutNotApp'
 import UserLayout from 'src/view/layout/UserLayout'
+import CustomPagination from 'src/components/custom-pagination'
 
 export default function Home() {
   const theme = useTheme()
@@ -34,6 +35,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       {/* <Typography>Hello Word Update</Typography> */}
+      <CustomPagination page={1} pageSize={5} rowLength={200} pageSizeOptions={[5, 10, 20, 30]} onChangePagination={() => {}} />
     </>
   )
 }
