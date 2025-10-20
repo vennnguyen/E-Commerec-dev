@@ -26,5 +26,13 @@
   "Confirm_new_password": "Xác nhận mật khẩu mới",
    "enter_new_password": "Nhập mật khẩu mới",
     "enter_confirm_new_password": "Xác nhận mật khẩu mới",
-    "Change":"Thay đổi"
-}
+    "Change":"Thay đổi",
+    "manage_system":"Quản lý hệ thống",
+ "login_success": "Đăng nhập thành công",
+    "Name": "Tên",
+    "Actions": "Thao tác",
+    "Create": "Tạo",
+    "Edit": "Sửa",
+    "Delete": "Xóa",
+    "required_field": "Trường này bắt buộc",
+    "create-role-success": "Tạo nhóm vai trò thành công"}

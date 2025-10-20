@@ -10,22 +10,7 @@ import UserLayout from 'src/view/layout/UserLayout'
 import CustomPagination from 'src/components/custom-pagination'
 
 export default function Home() {
-  const theme = useTheme()
-  const { settings } = useSettings()
 
-  // const fetchApiUser = async () => {
-  //   const response = await fetch('https://jsonplaceholder.typicode.com/users')
-  //   const data = await response.json()
-  //   console.log(data)
-  // }
-  // const fetchApiUser = async () => {
-  //   await axios.get('http://localhost:3001/api/users?limit=10&page=1&order=created%20asc').then(res => {
-  //     console.log('res')
-  //   })
-  // }
-  // useEffect(() => {
-  //   fetchApiUser()
-  // }, [])
   return (
     <>
       <Head>
@@ -35,7 +20,6 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       {/* <Typography>Hello Word Update</Typography> */}
-      <CustomPagination page={1} pageSize={5} rowLength={200} pageSizeOptions={[5, 10, 20, 30]} onChangePagination={() => {}} />
     </>
   )
 }

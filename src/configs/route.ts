@@ -19,5 +19,7 @@ export const ROUTE = {
     CITY: '/settings/city',
     PAYMENT_TYPE: '/settings/payment-type',
     DELIVERY_TYPE: '/settings/delivery-type'
-  }
+  },
+  DASHBOARD: '/dashboard',
+
 }

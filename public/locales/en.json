@@ -27,5 +27,14 @@
   "Current_password": "Current password",
   "New_password": "New password",
   "Confirm_new_password":"Confirm new password",
-  "Change":"Change"
+  "Change":"Change",
+  "manage_system":"Manage system",
+  "login_success": "Login successful",
+    "Name": "Name",
+    "Actions": "Actions",
+    "Create": "Create",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "required_field": "The field is required",
+    "create-role-success": "Created role success"
 }
